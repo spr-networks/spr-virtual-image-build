@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+# This script is designed to run once for initial spr setup.
+# NOTE we checkout repo and download images on first boot
+# could consider doing this on build, then just run pull to verify instead
+
+# root user for now
+SPR_HOME=/home/spr
+mkdir $SPR_HOME 2>/dev/null
+cd $SPR_HOME
+
+git clone https://github.com/spr-networks/super.git
+cd super
+# TODO remove
+git checkout dev
+cp docker-compose-virt.yml docker-compose.yml
+
+export SKIP_VPN=1
+./virtual_install.sh | tee /tmp/spr_install.log
+#bash -c "$(curl -fsSL https://raw.github.com/spr-networks/super/master/virtual_install.sh)"
+
+# Remove the ssh force logout command
+sed -e '/Match User root/d' \
+    -e '/.*ForceCommand.*droplet.*/d' \
+    -i /etc/ssh/sshd_config
+
+systemctl restart ssh

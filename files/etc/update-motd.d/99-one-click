@@ -1,0 +1,25 @@
+#!/bin/sh
+#
+# Configured as part of the DigitalOcean 1-Click Image build process
+
+myip=$(hostname -I | awk '{print$1}')
+# this is log from 001_onboot
+SPR_INIT=$(cat /tmp/spr_install.log)
+
+cat <<EOF
+********************************************************************************
+
+Welcome to SPR Virtual 1-Click Droplet!
+
+Open ports: 22/tcp (ssh), 51280/udp (wireguard)
+
+$SPR_INIT
+
+add vpn peer:
+cd /home/spr/super && ./virtual_install.sh
+
+********************************************************************************
+EOF
+
+rm -f /tmp/spr_install.log
+#To delete this message of the day: rm -rf $(readlink -f ${0})
