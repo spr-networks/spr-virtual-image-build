@@ -15,10 +15,8 @@ packer build template.json
 
 # build with docker
 
+## init packer with docean plugin
 ```sh
-export DIGITALOCEAN_API_TOKEN="TOKEN_HERE"
-
-# init packer with docean plugin
 docker run \
 	--rm \
 	-it \
@@ -26,8 +24,12 @@ docker run \
 	-e PACKER_PLUGIN_PATH=/workspace/.packer.d/plugins \
 	hashicorp/packer:latest \
 	init .
+```
 
-# build spr image
+## build spr image and push to do
+```sh
+export DIGITALOCEAN_API_TOKEN="TOKEN_HERE"
+
 docker run \
 	--rm \
 	-it \
