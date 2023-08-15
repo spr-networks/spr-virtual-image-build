@@ -10,8 +10,6 @@ cd $SPR_HOME
 
 git clone https://github.com/spr-networks/super.git
 cd super
-# TODO remove
-git checkout dev
 cp docker-compose-virt.yml docker-compose.yml
 
 export SKIP_VPN=1
