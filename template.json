@@ -14,7 +14,7 @@
       "type": "digitalocean",
       "api_token": "{{user `do_api_token`}}",
       "image": "ubuntu-22-04-x64",
-      "region": "ams2",
+      "region": "lon1",
       "size": "s-1vcpu-1gb",
       "ssh_username": "root",
       "snapshot_name": "{{user `image_name`}}"
@@ -66,7 +66,8 @@
         "scripts/018-force-ssh-logout.sh",
         "scripts/019-spr.sh",
         "scripts/020-application-tag.sh",
-        "scripts/900-cleanup.sh"
+        "scripts/900-cleanup.sh",
+	"scripts/999-img-check.sh"
       ]
     }
   ]
