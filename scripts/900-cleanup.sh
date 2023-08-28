@@ -43,3 +43,4 @@ dd if=/dev/zero of=/zerofile &
 sync; rm /zerofile; sync
 cat /dev/null > /var/log/lastlog; cat /dev/null > /var/log/wtmp
 sudo apt-get --yes purge droplet-agent*
+rm -f /var/log/ubuntu-advantage.log /var/log/kern.log /var/log/dpkg.log /var/log/auth.log
