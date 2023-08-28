@@ -4,15 +4,10 @@
 # could consider doing this on build, then just run pull to verify instead
 
 # root user for now
-SPR_HOME=/home/spr
-mkdir $SPR_HOME 2>/dev/null
-cd $SPR_HOME
 
-git clone https://github.com/spr-networks/super.git
-cd super
-cp docker-compose-virt.yml docker-compose.yml
-
+cd /home/spr/super
 export SKIP_VPN=1
+./pull_containers.sh # update latest
 ./virtual_install.sh | tee /tmp/spr_install.log
 #bash -c "$(curl -fsSL https://raw.github.com/spr-networks/super/master/virtual_install.sh)"
 
@@ -22,3 +17,11 @@ sed -e '/Match User root/d' \
     -i /etc/ssh/sshd_config
 
 systemctl restart ssh
+
+# now add to start spr on boot
+cat > /etc/rc.local <<_EOF
+#!/bin/bash
+
+cd /home/spr/super && docker-compose up -d
+_EOF
+chmod +x /etc/rc.local
