@@ -1,7 +1,4 @@
-
-ufw limit ssh
-ufw allow 51280/udp
-ufw --force enable
+#!/bin/sh
 
 SPR_HOME=/home/spr
 mkdir $SPR_HOME 2>/dev/null
