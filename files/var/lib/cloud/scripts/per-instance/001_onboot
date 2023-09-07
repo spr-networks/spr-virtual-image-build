@@ -8,7 +8,7 @@
 cd /home/spr/super
 export SKIP_VPN=1
 git pull
-./pull_containers.sh # update latest
+docker-compose -f docker-compose-virt.yml pull # update latest
 ./virtual_install.sh | tee /tmp/spr_install.log
 #bash -c "$(curl -fsSL https://raw.github.com/spr-networks/super/master/virtual_install.sh)"
 

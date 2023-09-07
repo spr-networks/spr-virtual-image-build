@@ -6,5 +6,6 @@ cd $SPR_HOME
 
 git clone https://github.com/spr-networks/super.git
 cd super
-cp docker-compose-virt.yml docker-compose.yml
-./pull_containers.sh
+#cp docker-compose-virt.yml docker-compose.yml
+docker-compose -f docker-compose-virt.yml pull # update latest
+#./pull_containers.sh
