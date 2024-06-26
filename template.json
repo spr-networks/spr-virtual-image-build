@@ -2,10 +2,10 @@
 {
   "variables": {
     "do_api_token": "{{env `DIGITALOCEAN_API_TOKEN`}}",
-    "image_name": "spr-virt-22-04-snapshot-{{timestamp}}",
-    "apt_packages": "apt-transport-https ca-certificates software-properties-common curl git docker-compose docker.io jq qrencode iproute2 wireguard-tools",
+    "image_name": "spr-virt-24-04-snapshot-{{timestamp}}",
+    "apt_packages": "apt-transport-https ca-certificates software-properties-common curl git jq qrencode iproute2 wireguard-tools",
     "application_name": "SPR Virtual",
-    "application_version": "0.2.19",
+    "application_version": "0.3.13",
     "docker_compose_version": "v2.12.0"
   },
   "sensitive-variables": ["do_api_token"],
@@ -13,7 +13,7 @@
     {
       "type": "digitalocean",
       "api_token": "{{user `do_api_token`}}",
-      "image": "ubuntu-22-04-x64",
+      "image": "ubuntu-24-04-x64",
       "region": "fra1",
       "size": "s-1vcpu-512mb-10gb",
       "ssh_username": "root",
@@ -25,7 +25,8 @@
       "type": "shell",
       "inline": [
         "cloud-init status --wait"
-      ]
+      ],
+      "valid_exit_codes": [0, 2]
     },
     {
       "type": "file",
@@ -69,7 +70,7 @@
         "scripts/019-spr.sh",
         "scripts/020-application-tag.sh",
         "scripts/900-cleanup.sh",
-	"scripts/999-img-check.sh"
+	      "scripts/999-img-check.sh"
       ]
     }
   ]

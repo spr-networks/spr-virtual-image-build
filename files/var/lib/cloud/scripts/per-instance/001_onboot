@@ -8,7 +8,7 @@
 cd /home/spr/super
 export SKIP_VPN=1
 git pull
-docker-compose -f docker-compose-virt.yml pull # update latest
+docker compose -f docker-compose-virt.yml pull # update latest
 ./virtual_install.sh | tee /tmp/spr_install.log
 #bash -c "$(curl -fsSL https://raw.github.com/spr-networks/super/master/virtual_install.sh)"
 
@@ -23,6 +23,6 @@ systemctl restart ssh
 cat > /etc/rc.local <<_EOF
 #!/bin/bash
 
-cd /home/spr/super && docker-compose -f docker-compose-virt.yml up -d
+cd /home/spr/super && docker compose -f docker-compose-virt.yml up -d
 _EOF
 chmod +x /etc/rc.local
